@@ -28,15 +28,14 @@ func (seq *StepSequence) Copy() StepSequence {
 	return copy
 }
 
-func NumWaysWithStepSequences(N int, X []int, stepSequence StepSequence) (int, []StepSequence) {
+func NumWaysWithStepSequences(N int, X []int, stepSequence StepSequence) (numberOfPathes int, stepSequences []StepSequence) {
 	if N == 0 {
 		return 1, []StepSequence{stepSequence}
 	}
 
 	var stepSequencesToAdd []StepSequence
-	var stepSequences []StepSequence
 	var numberOfPathesFromHere int
-	numberOfPathes := 0
+	numberOfPathes = 0
 
 	for _, x := range X {
 		if x <= N {
@@ -48,5 +47,5 @@ func NumWaysWithStepSequences(N int, X []int, stepSequence StepSequence) (int, [
 		}
 	}
 
-	return numberOfPathes, stepSequences
+	return
 }
