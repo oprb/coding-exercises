@@ -22,7 +22,7 @@ func (seq *StepSequence) String() string {
 func (seq *StepSequence) Copy() StepSequence {
 	copy := make(StepSequence, len(*seq))
 	for i := 0; i < len(*seq); i++ {
-		copy[i] = []int(*seq)[i]
+		copy[i] = (*seq)[i]
 	}
 
 	return copy
