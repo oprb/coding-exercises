@@ -3,6 +3,7 @@ package powerset
 import (
 	"strings"
 	"fmt"
+	"math"
 )
 
 type Set []interface{}
@@ -65,6 +66,37 @@ func powerSetHelper(set Set, setComponent Set) Set {
 		}
 	} else {
 		resultingSet = Set{setsWithItem, setsWithoutItem}
+	}
+
+	return resultingSet
+}
+
+func PowerSetIterative(set Set) Set {
+	cardinalityOfResultingSet := int(math.Pow(2, float64(len(set))))
+	resultingSet := make(Set, cardinalityOfResultingSet)
+
+	for i := 0; i < cardinalityOfResultingSet; i++ {
+		resultingSet[i] = Set{}
+	}
+
+	if cardinalityOfResultingSet > 1 {
+		divisions := 2
+		elementsPerDivision := cardinalityOfResultingSet / 2
+		for _, element := range set {
+			index := 0
+			bound := elementsPerDivision
+			for division := 0; division < divisions; division += 2 {
+				for ; index < bound; index++ {
+					resultingSet[index] = append(resultingSet[index].(Set), element)
+				}
+
+				bound += 2 * elementsPerDivision
+				index += elementsPerDivision
+			}
+
+			divisions = divisions * 2
+			elementsPerDivision = elementsPerDivision / 2
+		}
 	}
 
 	return resultingSet
