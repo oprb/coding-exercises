@@ -3,7 +3,7 @@ package tower_hopper_problem
 import "math"
 
 type TowerHeight int
-type Towers []int
+type Towers []TowerHeight
 type HopPosition int
 type HopSequence []HopPosition
 
@@ -14,12 +14,12 @@ func IsHoppable(towers Towers) (isPossible bool, hopsTaken HopSequence)  {
 	hopsTaken = HopSequence{0}
 
 	for !doneWithHopping {
-		maxHopsPossible := towers[currentTower]
+		maxHopsPossible := int(towers[currentTower])
 		currentBestNextTower := currentTower
 		currentWidestHopDistance := maxHopsPossible
 		for hopLength := 1; hopLength <= maxHopsPossible; hopLength++ {
 			if nextTower := currentTower + hopLength; nextTower < numberOfTowers {
-				hopsFromThere := towers[nextTower]
+				hopsFromThere := int(towers[nextTower])
 				hopSum := hopLength + hopsFromThere
 				if hopsFromThere > 0 &&  hopSum > currentWidestHopDistance {
 						currentWidestHopDistance = hopSum
